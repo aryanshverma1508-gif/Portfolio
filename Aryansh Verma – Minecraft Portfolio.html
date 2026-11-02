@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Aryansh Verma – Minecraft Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sky-top:#6fb7ff;--sky-bot:#c9e8ff;--ink:#1d1d1d;--panel:#c6c6c6;--panel-hi:#fff;--panel-lo:#555;
+  --grass:#5d9c34;--grass-d:#3f7a22;--dirt:#8b5a2b;--dirt-d:#6b4220;--stone:#7d7d7d;--gold:#f5c542;--redstone:#d32f2f;--text:#1d1d1d;--on-dirt:#fff4e0;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--sky-top:#0b1033;--sky-bot:#2a2f6b;--ink:#f2f2f2;--panel:#3a3a3a;--panel-hi:#6a6a6a;--panel-lo:#111;--text:#f2f2f2}}
+:root[data-theme="dark"]{--sky-top:#0b1033;--sky-bot:#2a2f6b;--ink:#f2f2f2;--panel:#3a3a3a;--panel-hi:#6a6a6a;--panel-lo:#111;--text:#f2f2f2}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;font-family:'VT323','Courier New',monospace;font-size:22px;line-height:1.35;color:var(--text);background:linear-gradient(var(--sky-top),var(--sky-bot) 900px,var(--sky-bot));background-color:var(--sky-bot);image-rendering:pixelated;overflow-x:hidden}
+h1,h2,h3{font-family:'Press Start 2P','Courier New',monospace;font-weight:400;line-height:1.5;margin:0}
+a{color:inherit}
+:focus-visible{outline:4px solid var(--gold);outline-offset:2px}
+.wrap{max-width:980px;margin:0 auto;padding:0 20px}
+
+/* Minecraft-style panel */
+.panel{background:var(--panel);color:var(--text);border:4px solid;border-color:var(--panel-hi) var(--panel-lo) var(--panel-lo) var(--panel-hi);box-shadow:0 0 0 4px #000}
+.btn{font-family:'Press Start 2P',monospace;font-size:12px;padding:14px 18px;cursor:pointer;background:var(--stone);color:#fff;border:4px solid;border-color:#bdbdbd #3a3a3a #3a3a3a #bdbdbd;box-shadow:0 0 0 4px #000;text-decoration:none;display:inline-block;text-shadow:2px 2px #2a2a2a}
+.btn:hover{background:#6e8bd8}
+.btn.green{background:var(--grass)}.btn.green:hover{background:#74b84a}
+
+/* Hero */
+header.hero{position:relative;min-height:640px;padding-top:70px;overflow:hidden}
+.hero h1{font-size:clamp(22px,5vw,44px);color:#fff;text-shadow:4px 4px #1d1d1d;max-width:620px}
+.hero p{font-size:28px;max-width:480px;color:#fff;text-shadow:2px 2px #1d1d1d;margin:18px 0 26px}
+.hero .cta{display:flex;gap:18px;flex-wrap:wrap}
+.island{position:absolute;right:max(20px,calc(50% - 480px));top:150px;width:260px;animation:bob 5s ease-in-out infinite}
+.island .top{height:36px;background:repeating-linear-gradient(90deg,var(--grass) 0 20px,var(--grass-d) 20px 40px);border:4px solid #000;border-bottom:0}
+.island .mid{height:60px;background:repeating-linear-gradient(90deg,var(--dirt) 0 26px,var(--dirt-d) 26px 52px);border:4px solid #000;border-bottom:0;clip-path:polygon(0 0,100% 0,92% 100%,8% 100%)}
+.island .low{height:70px;margin:0 36px;background:repeating-linear-gradient(90deg,var(--dirt-d) 0 20px,#4a2e14 20px 40px);clip-path:polygon(0 0,100% 0,70% 100%,30% 100%)}
+.island .tree{position:absolute;left:100px;bottom:96px;width:24px;height:60px;background:#6b4220;border:4px solid #000}
+.island .tree::before{content:"";position:absolute;left:-34px;top:-52px;width:88px;height:60px;background:#2f7d32;border:4px solid #000}
+@keyframes bob{50%{transform:translateY(-22px)}}
+.cube{position:absolute;width:var(--s);height:var(--s);left:var(--x);bottom:-80px;background:var(--c);border:3px solid #000;box-shadow:inset -6px -6px 0 rgba(0,0,0,.25),inset 6px 6px 0 rgba(255,255,255,.25);animation:rise var(--d) linear var(--delay) infinite;cursor:pointer;z-index:2;padding:0}
+.cube.mined{visibility:hidden;animation-play-state:paused}
+.cube:hover{filter:brightness(1.3)}
+@keyframes rise{to{transform:translateY(-760px) rotate(180deg)}}
+.ground{height:60px;background:repeating-linear-gradient(90deg,var(--grass) 0 40px,var(--grass-d) 40px 80px);border-top:4px solid #000}
+.ground-dirt{background:repeating-linear-gradient(90deg,var(--dirt) 0 40px,var(--dirt-d) 40px 80px);padding:60px 0;border-top:4px solid #000;color:var(--on-dirt)}
+
+/* Sections */
+section{padding:56px 0}
+h2{font-size:clamp(16px,3vw,24px);margin-bottom:26px}
+.ground-dirt h2{text-shadow:3px 3px #2a1a0a}
+.about{display:grid;grid-template-columns:200px 1fr;gap:28px;align-items:center}
+.avatar{width:160px;height:160px;image-rendering:pixelated;border:4px solid #000;background:#9ad;display:block}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+.stat{background:rgba(0,0,0,.3);padding:10px;border:3px solid #000;text-align:center}
+.stat b{display:block;font-family:'Press Start 2P',monospace;font-size:16px;color:var(--gold);margin-bottom:6px}
+
+/* Hotbar */
+.hotbar{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;padding:14px;background:rgba(0,0,0,.55);border:4px solid #000}
+.slot{background:#8b8b8b;border:4px solid;border-color:#373737 #fff #fff #373737;aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;color:#fff;cursor:default;transition:transform .5s cubic-bezier(.3,1.6,.5,1)}
+.slot i{width:44px;height:44px;background:var(--c);border:3px solid #000;box-shadow:inset -6px -6px 0 rgba(0,0,0,.28),inset 6px 6px 0 rgba(255,255,255,.28);display:block}
+.slot span{font-size:20px;text-shadow:2px 2px #222}
+.slot small{font-size:16px;opacity:.85}
+
+/* Anti-gravity mode */
+.zero-g .slot,.zero-g .quest,.zero-g .avatar,.zero-g .stat{animation:drift var(--t,6s) ease-in-out var(--dl,0s) infinite alternate}
+.zero-g .island{animation-duration:2.5s}
+@keyframes drift{from{transform:translateY(0) rotate(0)}to{transform:translateY(var(--dy,-18px)) rotate(var(--r,3deg))}}
+.gbar{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:5}
+.gbar .btn{font-size:11px}
+
+/* Quests */
+.quests{display:grid;gap:18px}
+.quest{display:grid;grid-template-columns:64px 1fr;gap:16px;padding:16px;align-items:center}
+.quest .ico{width:56px;height:56px;border:3px solid #000;background:var(--c);box-shadow:inset -8px -8px 0 rgba(0,0,0,.28),inset 8px 8px 0 rgba(255,255,255,.28)}
+.quest h3{font-size:13px;margin-bottom:8px}
+.quest p{margin:0 0 6px}
+.tag{display:inline-block;background:#222;color:#fff;padding:0 8px;margin-right:6px;font-size:18px}
+.adv{font-family:'Press Start 2P',monospace;font-size:10px;color:#2d7d2d;margin-bottom:8px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .adv{color:#7ddc7d}}
+
+/* Interactive bits */
+.slot{cursor:pointer}
+.slot:hover{transform:translateY(-6px)}
+.slot.sel{border-color:#fff #373737 #373737 #fff;background:#a8a8a8;outline:4px solid var(--gold);outline-offset:0}
+.detail{margin-top:18px;padding:16px 18px;min-height:96px}
+.detail h3{font-size:13px;margin-bottom:10px}
+.bar{height:16px;background:#222;border:3px solid #000;margin-top:10px}
+.bar div{height:100%;background:var(--grass);width:0;transition:width .6s steps(10)}
+.quest{cursor:pointer}
+.quest .more{display:none;margin-top:10px;padding-top:10px;border-top:3px dashed var(--panel-lo)}
+.quest.open .more{display:block}
+.quest .hint{font-size:16px;opacity:.7}
+.quest:hover{transform:translateX(6px)}
+.toast{position:fixed;left:50%;top:calc(16px + env(safe-area-inset-top,0px));transform:translate(-50%,-140%);transition:transform .35s steps(6);z-index:9;background:#222;color:#fff;border:4px solid #000;box-shadow:inset 0 0 0 3px #555;padding:12px 18px;font-family:'Press Start 2P',monospace;font-size:10px;max-width:92vw;text-align:center}
+.toast.show{transform:translate(-50%,0)}
+.gbar{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;max-width:92vw}
+.count{font-family:'Press Start 2P',monospace;font-size:11px;background:#222;color:#fff;border:4px solid #000;padding:12px 14px}
+
+/* Contact */
+.sign{max-width:520px;background:#b98a4e;color:#2a1a0a;border:4px solid #000;padding:24px;box-shadow:inset 0 0 0 4px #8b5a2b}
+.sign a{display:block;font-size:26px;margin:6px 0}
+footer{text-align:center;padding:30px 20px 90px;background:var(--dirt-d);color:var(--on-dirt);border-top:4px solid #000}
+
+@media (max-width:720px){
+  body{font-size:20px}
+  .island{position:relative;right:auto;top:auto;margin:30px auto 0;width:200px}
+  header.hero{min-height:0;padding-bottom:30px}
+  .about{grid-template-columns:1fr;justify-items:start}
+  .stats{grid-template-columns:1fr}
+  .quest{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div id="cubes" aria-hidden="true"></div>
+  <div class="wrap">
+    <h1>Aryansh Verma crafts things that don’t fall down.</h1>
+    <p>Full-stack developer. I build fast, playful web apps and ship them like a speedrun.</p>
+    <div class="cta"><a class="btn green" href="#quests">View my quests</a><a class="btn" href="#contact">Join my server</a></div>
+  </div>
+  <div class="island" aria-hidden="true"><div class="tree"></div><div class="top"></div><div class="mid"></div><div class="low"></div></div>
+</header>
+<div class="ground"></div>
+
+<div class="ground-dirt">
+  <div class="wrap">
+    <h2>Player profile</h2>
+    <div class="about">
+      <svg class="avatar" viewBox="0 0 8 8" shape-rendering="crispEdges" role="img" aria-label="Pixel avatar">
+        <rect width="8" height="8" fill="#8fc7ff"/>
+        <rect x="1" y="0" width="6" height="2" fill="#3b2a1a"/>
+        <rect x="1" y="2" width="6" height="5" fill="#e0ac84"/>
+        <rect x="1" y="2" width="1" height="1" fill="#3b2a1a"/><rect x="6" y="2" width="1" height="1" fill="#3b2a1a"/>
+        <rect x="2" y="4" width="1" height="1" fill="#fff"/><rect x="5" y="4" width="1" height="1" fill="#fff"/>
+        <rect x="3" y="4" width="1" height="1" fill="#3a56c9"/><rect x="4" y="4" width="1" height="1" fill="#3a56c9"/>
+        <rect x="3" y="6" width="2" height="1" fill="#8a4a3a"/>
+        <rect x="1" y="7" width="6" height="1" fill="#00a7a7"/>
+      </svg>
+      <div>
+        <p>I’m a developer who treats every project like a new world: scout the terrain, gather resources, build the base, then polish. I work across front end, back end and deployment, and I like products that feel fun to use.</p>
+        <div class="stats">
+          <div class="stat"><b>4 yrs</b>Building web apps</div>
+          <div class="stat"><b>30+</b>Projects shipped</div>
+          <div class="stat"><b>12</b>Hackathons survived</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ground"></div>
+
+<section>
+  <div class="wrap">
+    <h2 style="color:#fff;text-shadow:3px 3px #1d1d1d">Inventory</h2>
+    <div class="hotbar" id="hotbar"></div>
+    <div class="panel detail" id="detail" aria-live="polite"><h3>Select an item</h3><p>Click a slot or press 1–9 to inspect a skill.</p></div>
+  </div>
+</section>
+
+<div class="ground-dirt" id="quests">
+  <div class="wrap">
+    <h2>Quests completed</h2>
+    <div class="quests" id="questlist"></div>
+  </div>
+</div>
+<div class="ground"></div>
+
+<section id="contact">
+  <div class="wrap">
+    <h2 style="color:#fff;text-shadow:3px 3px #1d1d1d">Send a message</h2>
+    <div class="sign">
+      <p style="margin-top:0">Got a world that needs building? Find me here:</p>
+      <a href="mailto:aryansh@example.com">aryansh@example.com</a>
+      <a href="https://github.com/">github.com/aryanshverma</a>
+      <a href="https://linkedin.com/">linkedin.com/in/aryanshverma</a>
+    </div>
+  </div>
+</section>
+<footer>Built block by block. Respawn point saved.</footer>
+
+<div class="toast" id="toast" role="status"></div>
+<div class="gbar"><span class="count" id="count">Mined: 0</span><button class="btn" id="t">Day / Night</button><button class="btn" id="g" aria-pressed="false">Gravity: ON</button></div>
+
+<script>
+var skills=[["JavaScript","Expert","#f5c542"],["React","Expert","#4fc3f7"],["Node.js","Advanced","#5d9c34"],["Python","Advanced","#3b6fd4"],["CSS","Expert","#c05ad6"],["SQL","Advanced","#d97b2b"],["Git","Expert","#d32f2f"],["Docker","Intermediate","#2a8bd6"],["Figma","Intermediate","#8a8a8a"]];
+var quests=[
+ ["Redstone Dashboard","Real-time analytics dashboard that streams events and updates charts without a refresh.",["React","WebSockets","Node.js"],"#d32f2f","Advancement made: Ship it"],
+ ["Creeper Chat","A multiplayer chat app with rooms, reactions and an anti-spam filter.",["Firebase","TypeScript"],"#5d9c34","Advancement made: Monster hunter"],
+ ["Diamond Planner","Budget tracker that turns spending into clear weekly goals and streaks.",["Python","Flask","SQL"],"#4fc3f7","Advancement made: Diamonds!"]
+];
+var hb=document.getElementById('hotbar');
+skills.forEach(function(s,i){var d=document.createElement('div');d.className='slot';d.style.setProperty('--c',s[2]);d.style.setProperty('--dy',(-14-(i*7)%22)+'px');d.style.setProperty('--r',((i%3)-1)*4+'deg');d.style.setProperty('--dl',(i*0.3)+'s');d.style.setProperty('--t',(4+i%4)+'s');d.innerHTML='<i></i><span>'+s[0]+'</span><small>'+s[1]+'</small>';hb.appendChild(d)});
+var ql=document.getElementById('questlist');
+quests.forEach(function(q,i){var d=document.createElement('article');d.className='quest panel';d.style.setProperty('--c',q[3]);d.style.setProperty('--dy',(-10-i*4)+'px');d.style.setProperty('--dl',(i*0.5)+'s');d.innerHTML='<div class="ico"></div><div><div class="adv">'+q[4]+'</div><h3>'+q[0]+'</h3><p>'+q[1]+'</p><div>'+q[2].map(function(t){return '<span class="tag">'+t+'</span>'}).join('')+'</div></div>';ql.appendChild(d)});
+var cubes=document.getElementById('cubes'),cols=['#5d9c34','#8b5a2b','#7d7d7d','#4fc3f7','#f5c542','#d32f2f'];
+for(var i=0;i<14;i++){var c=document.createElement('div');c.className='cube';c.style.setProperty('--s',(18+Math.random()*28)+'px');c.style.setProperty('--x',(Math.random()*96)+'%');c.style.setProperty('--c',cols[i%cols.length]);c.style.setProperty('--d',(9+Math.random()*10)+'s');c.style.setProperty('--delay','-'+(Math.random()*14)+'s');cubes.appendChild(c)}
+var g=document.getElementById('g');
+g.addEventListener('click',function(){var on=document.body.classList.toggle('zero-g');g.textContent='Gravity: '+(on?'OFF':'ON');g.setAttribute('aria-pressed',on);toast(on?'Gravity disabled. Things are floating.':'Gravity restored.')});
+
+var toastEl=document.getElementById('toast'),tt;
+function toast(m){toastEl.textContent=m;toastEl.classList.add('show');clearTimeout(tt);tt=setTimeout(function(){toastEl.classList.remove('show')},2600)}
+
+// Mine the floating blocks
+var mined=0,cnt=document.getElementById('count');
+var marks={5:'Achievement: Getting Wood',10:'Achievement: Time to Mine!',20:'Achievement: Diamonds!'};
+cubes.querySelectorAll('.cube').forEach(function(c){
+  c.setAttribute('role','button');c.setAttribute('aria-label','Mine block');
+  c.addEventListener('click',function(){
+    if(c.classList.contains('mined'))return;
+    c.classList.add('mined');mined++;cnt.textContent='Mined: '+mined;
+    if(marks[mined])toast(marks[mined]);
+    setTimeout(function(){c.classList.remove('mined')},3500);
+  });
+});
+
+// Inventory detail panel
+var info={"JavaScript":["Primary language. Used daily for apps, tooling and games.",95],"React":["Component-driven UIs, state management and performance tuning.",92],"Node.js":["APIs, real-time servers and build scripts.",80],"Python":["Automation, data work and small Flask services.",78],"CSS":["Layout, animation and design systems, including this page.",94],"SQL":["Schema design and queries that stay fast as data grows.",75],"Git":["Branching, code review and clean history.",90],"Docker":["Containerised dev setups and simple deployments.",60],"Figma":["Wireframes and quick prototypes before building.",58]};
+var det=document.getElementById('detail'),slots=hb.querySelectorAll('.slot');
+function pick(i){
+  var s=slots[i];if(!s)return;
+  slots.forEach(function(x){x.classList.remove('sel')});s.classList.add('sel');
+  var n=skills[i][0],d=info[n];
+  det.innerHTML='<h3>'+n+' ('+skills[i][1]+')</h3><p style="margin:0">'+d[0]+'</p><div class="bar"><div id="fill"></div></div>';
+  requestAnimationFrame(function(){requestAnimationFrame(function(){document.getElementById('fill').style.width=d[1]+'%'})});
+}
+slots.forEach(function(s,i){s.tabIndex=0;s.setAttribute('role','button');
+  s.addEventListener('click',function(){pick(i)});
+  s.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();pick(i)}});
+});
+document.addEventListener('keydown',function(e){var k=parseInt(e.key,10);if(k>=1&&k<=9&&!e.metaKey&&!e.ctrlKey&&!e.altKey)pick(k-1)});
+
+// Expandable quests
+var more=["Built with a event-stream layer that batches updates every 200 ms. Cut page load time in half with code splitting.","Supports 500 concurrent users in testing. Messages are stored per room and filtered before they are shown.","Imports bank CSV files, groups spending by category and shows a streak counter for staying under budget."];
+ql.querySelectorAll('.quest').forEach(function(q,i){
+  var b=q.children[1];b.insertAdjacentHTML('beforeend','<div class="more">'+more[i]+'</div><div class="hint">Click to expand</div>');
+  q.tabIndex=0;q.setAttribute('role','button');q.setAttribute('aria-expanded','false');
+  function tg(){var o=q.classList.toggle('open');q.setAttribute('aria-expanded',o);q.querySelector('.hint').textContent=o?'Click to collapse':'Click to expand'}
+  q.addEventListener('click',tg);
+  q.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();tg()}});
+});
+
+// Day / night
+var tb=document.getElementById('t'),root=document.documentElement;
+tb.addEventListener('click',function(){
+  var dark=root.getAttribute('data-theme')?root.getAttribute('data-theme')==='dark':matchMedia('(prefers-color-scheme: dark)').matches;
+  root.setAttribute('data-theme',dark?'light':'dark');toast(dark?'It is now day.':'It is now night.');
+});
+</script>
+</body>
+</html>
